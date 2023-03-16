@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import profileEditAvatar from '../images/popup.svg'
 import Card from './Card';
-import api from "./Api";
+import api from '../utils/Api';
 
 // обработчики
 function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
@@ -10,7 +10,7 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
   const [userAvatar, setUserAvatar] = useState("")
   const [cards, getInitialCards] = useState([])
 
-
+  //prescribe api
   useEffect(() => {
     api
       .getRealUserInfo()
@@ -72,6 +72,7 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
                 }}
                 />
             </section>
+
             {/* добавление карточек */}
             <section className="gallery">
               {cards.map((card) => (
@@ -84,6 +85,7 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
                 />
               ))}
             </section>
+            
           </main>
       </div>
     )

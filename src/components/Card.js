@@ -6,7 +6,7 @@ function Card(card) {
   }
 
   return (
-
+    //add marking up cards
     <article className="gallery__item"> 
       <div className="gallery__img-block">
         <img

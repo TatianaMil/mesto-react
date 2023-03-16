@@ -7,12 +7,13 @@ import ImagePopup from './ImagePopup';
 
 
 function App() {
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
-    React.useState(false)
+  //for profile
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false)
+  //for add cards
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false)
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
-    React.useState(false)
-
+  //for chanching avatar
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false)
+    //for show big img
   const [selectedCard, setSelectedCard] = React.useState({})
 
   function closeAllPopups() {
@@ -34,6 +35,7 @@ function App() {
             onEditAvatar={setIsEditAvatarPopupOpen}
             onCardClick={setSelectedCard}
             />
+            
           <Footer/>
 
             {/* chanched profile (name, about) */}

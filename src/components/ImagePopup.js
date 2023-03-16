@@ -1,6 +1,6 @@
 import React from "react"
 
-//img form
+//img form for open and close big img
 function ImagePopup({ card, onClose }) {
   return (
     <div
