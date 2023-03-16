@@ -16,4 +16,4 @@
 
 ## Ссылка на GitHub Pages: 
 
-- https://tatianamil.github.io/mesto-react/
+- [Проект mesto-react](https://tatianamil.github.io/mesto-react/)
