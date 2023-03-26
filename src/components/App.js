@@ -94,7 +94,6 @@ function App() {
         </div>
       </div>
         
-      <template className="template-new-img" id="template-new-img" />
     </div>
   );
 }

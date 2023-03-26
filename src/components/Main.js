@@ -36,7 +36,7 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
       .catch((error) => console.log(`Ошибка: ${error}`))
   }, [])
   return (
-      <div>
+    <>
         {/* основная разметка страницы */}
           <main>
             <section className="profile">
@@ -73,7 +73,6 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
                 />
             </section>
 
-            {/* добавление карточек */}
             <section className="gallery">
               {cards.map((card) => (
                 <Card
@@ -85,10 +84,9 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
                 />
               ))}
             </section>
-            
           </main>
-      </div>
-    )
+    </>
+  )
 }
 
 export default Main
