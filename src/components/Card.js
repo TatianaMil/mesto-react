@@ -1,8 +1,32 @@
-import React from "react"
+import { useContext} from "react";
+import CurrentUserContext from '../contexts/CurrentUserContext';
 
-function Card(card) {
+
+function Card({ card, onCardLike, onCardDelete, onCardClick }) {
+  const currentUser = useContext(CurrentUserContext)
+  // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
+  const isLiked = card.likes.some((user) => user._id === currentUser._id)
+  //chanched likes
+  const likeButtonClassName = `gallery__like ${
+    isLiked ? "gallery__like_active" : ""
+  }`
+  const isOwner = card.owner._id === currentUser._id
+
+  //chanched our card or not delete card
+  const deleteButtonClassName = `gallery__del ${
+    isOwner ? "gallery__del_active" : ""
+  }`
+
+  function handleLikeClick() {
+    onCardLike(card)
+  }
+
+  function handleDeleteClick() {
+    onCardDelete(card)
+  }
+
   function handleCardClick() {
-    card.onCardClick(card)
+    onCardClick(card)
   }
 
   return (
@@ -15,12 +39,19 @@ function Card(card) {
           alt={card.name}
           onClick={handleCardClick}
         />
-        <button className="gallery__del" type="button"></button>
+        <button 
+        className={deleteButtonClassName} 
+        type="button" 
+        onClick={handleDeleteClick}></button>
       </div>
       <div className="gallery__text-block">
         <h2 className="gallery__title">{card.name}</h2>
         <div className="gallery__wrapper-like">
-          <button className="gallery__like" type="button"></button>
+          <button 
+          className={likeButtonClassName} 
+          type="button"
+          onClick={handleLikeClick}
+          ></button>
           <p className="gallery__count-like">{card.likes.length}</p>
         </div>
       </div>
