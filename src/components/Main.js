@@ -9,7 +9,6 @@ function Main({ cards, onEditProfile, onAddPlace, onEditAvatar, onCardClick, onC
 
   return (
     <>
-        {/* основная разметка страницы */}
           <main>
             <section className="profile">
               <div className="profile__item">
