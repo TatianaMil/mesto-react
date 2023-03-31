@@ -4,14 +4,15 @@ import Footer from './Footer';
 import Main from './Main';
 import CurrentUserContext from '../contexts/CurrentUserContext';
 import { useState, useEffect } from 'react';
-import EditProfilePopup from "./EditProfilePopup"
-import EditAvatarPopup from "./EditAvatarPopup"
-import AddPlacePopup from "./AddPlacePopup"
-import PopupWithForm from "./PopupWithForm"
-import ImagePopup from "./ImagePopup"
-import api from "../utils/Api"
+import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
+import PopupDeleteCard from './PopupDeleteCard';
+import ImagePopup from "./ImagePopup";
+import api from "../utils/Api";
 
 function App() {
+  const [deletedCard, setDeletedCard] = useState({});
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
@@ -19,6 +20,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [cards, setCards] = useState([]);
+  const [isPopupDeleteCardOpen, setIsPopupDeleteCardOpen] = useState(false);
 
   useEffect(() => {
     api
@@ -46,6 +48,8 @@ function App() {
     setIsEditProfilePopupOpen(false)
     setIsAddPlacePopupOpen(false)
     setIsEditAvatarPopupOpen(false)
+    setIsPopupDeleteCardOpen(false)
+    setDeletedCard({})
     setSelectedCard({})
   }
 
@@ -124,12 +128,15 @@ function App() {
         <div className="page__container">
           <Header />
           <Main
+            onPopupDeleteCard={setIsPopupDeleteCardOpen}
             onEditProfile={setIsEditProfilePopupOpen}
             onEditAvatar={setIsEditAvatarPopupOpen}
             onAddPlace={setIsAddPlacePopupOpen}
             onCardDelete={handleCardDelete}
             onCardClick={setSelectedCard}
+
             onCardLike={handleCardLike}
+            onDeletedCard={setDeletedCard}
             cards={cards}
           />
           <Footer />
@@ -152,9 +159,11 @@ function App() {
             onLoading={isLoading}
           />
           <PopupDeleteCard
-            name='popupDeleteCard'
-            title="Вы уверены?"
-            buttonText="Да"
+            onClose={closeAllPopups}
+            isOpen={isPopupDeleteCardOpen}
+            onCardDelete={handleCardDelete}
+            card={deletedCard}
+            onLoading={isLoading}
           />
 
           <ImagePopup card={selectedCard} onClose={closeAllPopups} />

@@ -4,7 +4,7 @@ import profileEditAvatar from '../images/popup.svg';
 import Card from './Card';
 
 // обработчики
-function Main({ cards, onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, onCardDelete }) {
+function Main({ cards, onEditProfile, onAddPlace, onEditAvatar, onCardClick, onCardLike, onPopupDeleteCard, onDeletedCard }) {
   const currentUser = React.useContext(CurrentUserContext);
 
   return (
@@ -49,9 +49,10 @@ function Main({ cards, onEditProfile, onAddPlace, onEditAvatar, onCardClick, onC
               <Card
               card={card}
               key={card._id}
-              onCardDelete={onCardDelete}
+              onCardDelete={onDeletedCard}
               onCardClick={onCardClick}
               onCardLike={onCardLike}
+              onPopupDeleteCard={onPopupDeleteCard}
           />
         ))}
             </section>
