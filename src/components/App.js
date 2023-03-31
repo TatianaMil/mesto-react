@@ -151,11 +151,11 @@ function App() {
             onClose={closeAllPopups}
             onLoading={isLoading}
           />
-          <PopupWithForm
+          <PopupDeleteCard
             name='popupDeleteCard'
             title="Вы уверены?"
             buttonText="Да"
-          ></PopupWithForm>
+          />
 
           <ImagePopup card={selectedCard} onClose={closeAllPopups} />
         </div>
