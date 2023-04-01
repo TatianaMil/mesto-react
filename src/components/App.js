@@ -16,11 +16,12 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isPopupDeleteCardOpen, setIsPopupDeleteCardOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
   const [currentUser, setCurrentUser] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [cards, setCards] = useState([]);
-  const [isPopupDeleteCardOpen, setIsPopupDeleteCardOpen] = useState(false);
+  
 
   useEffect(() => {
     api
@@ -117,13 +118,14 @@ function App() {
     setIsLoading(true)
     api
       .removeCard(card._id)
-      .then(() =>
+      .then(() => {
         setCards((state) => state.filter((item) => item._id !== card._id))
+        closeAllPopups()
+      }
       )
-      
       .catch((error) => console.log(`Ошибка: ${error}`))
       .finally(() => setIsLoading(false))
-      closeAllPopups()
+      
   }
 
   return (
@@ -132,16 +134,14 @@ function App() {
         <div className="page__container">
           <Header />
           <Main
-            onPopupDeleteCard={setIsPopupDeleteCardOpen}
-            onEditProfile={setIsEditProfilePopupOpen}
-            onEditAvatar={setIsEditAvatarPopupOpen}
-            onAddPlace={setIsAddPlacePopupOpen}
-            onCardDelete={handleCardDelete}
-            onCardClick={setSelectedCard}
-
-            onCardLike={handleCardLike}
-            onDeletedCard={setDeletedCard}
-            cards={cards}
+          onEditProfile={setIsEditProfilePopupOpen}
+          onEditAvatar={setIsEditAvatarPopupOpen}
+          onAddPlace={setIsAddPlacePopupOpen}
+          onPopupDeleteCard={setIsPopupDeleteCardOpen}
+          onDeletedCard={setDeletedCard}
+          onCardClick={setSelectedCard}
+          onCardLike={handleCardLike}
+          cards={cards}
           />
           <Footer />
           <AddPlacePopup
