@@ -114,12 +114,16 @@ function App() {
   }
 
   function handleCardDelete(card) {
+    setIsLoading(true)
     api
       .removeCard(card._id)
       .then(() =>
         setCards((state) => state.filter((item) => item._id !== card._id))
       )
+      closeAllPopups()
       .catch((error) => console.log(`Ошибка: ${error}`))
+      .finally(() => setIsLoading(false))
+      
   }
 
   return (
@@ -162,8 +166,9 @@ function App() {
             onClose={closeAllPopups}
             isOpen={isPopupDeleteCardOpen}
             onCardDelete={handleCardDelete}
-            card={deletedCard}
             onLoading={isLoading}
+            card={deletedCard}
+            
           />
 
           <ImagePopup card={selectedCard} onClose={closeAllPopups} />
