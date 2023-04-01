@@ -120,10 +120,10 @@ function App() {
       .then(() =>
         setCards((state) => state.filter((item) => item._id !== card._id))
       )
-      closeAllPopups()
+      
       .catch((error) => console.log(`Ошибка: ${error}`))
       .finally(() => setIsLoading(false))
-      
+      closeAllPopups()
   }
 
   return (
