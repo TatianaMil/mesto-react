@@ -125,7 +125,6 @@ function App() {
       )
       .catch((error) => console.log(`Ошибка: ${error}`))
       .finally(() => setIsLoading(false))
-      
   }
 
   return (
@@ -168,7 +167,6 @@ function App() {
             onCardDelete={handleCardDelete}
             onLoading={isLoading}
             card={deletedCard}
-            
           />
 
           <ImagePopup card={selectedCard} onClose={closeAllPopups} />
