@@ -1,7 +1,7 @@
 import React from "react";
 import PopupWithForm from './PopupWithForm';
 
-function PopupDeleteCard({ onLoading, onClose, isOpen, onCardDelete, card }) {
+function PopupDeleteCard({ onLoading, onClose, isOpen, onCardDelete, card, onCloseOverlay }) {
     function handleSubmit(event) {
         event.preventDefault();
         onCardDelete(card);
@@ -14,7 +14,8 @@ function PopupDeleteCard({ onLoading, onClose, isOpen, onCardDelete, card }) {
           buttonText={onLoading ? `Удаление` : `Да`}
           onSubmit={handleSubmit}
           onClose={onClose}
-          isOpen={isOpen} 
+          isOpen={isOpen}
+          onCloseOverlay={onCloseOverlay}
           />
     )
 }

@@ -54,6 +54,29 @@ function App() {
     setSelectedCard({})
   }
 
+  function closeByOverlay(evt) {
+    if (evt.target === evt.currentTarget) {
+      console.log('asd')
+      closeAllPopups();
+    }
+  }
+
+    const isOpen = isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || isPopupDeleteCardOpen || selectedCard.link
+
+  useEffect(() => {
+    function closeByEscape(evt) {
+      if(evt.key === 'Escape') {
+        closeAllPopups();
+      }
+    }
+    if(isOpen) { // навешиваем только при открытии
+      document.addEventListener('keydown', closeByEscape);
+      return () => {
+        document.removeEventListener('keydown', closeByEscape);
+      }
+    }
+  }, [isOpen]) 
+
   function handleUpdateAvatar(newAvatar) {
     setIsLoading(true)
     api
@@ -133,14 +156,14 @@ function App() {
         <div className="page__container">
           <Header />
           <Main
-          onEditProfile={setIsEditProfilePopupOpen}
-          onEditAvatar={setIsEditAvatarPopupOpen}
-          onAddPlace={setIsAddPlacePopupOpen}
-          onPopupDeleteCard={setIsPopupDeleteCardOpen}
-          onDeletedCard={setDeletedCard}
-          onCardClick={setSelectedCard}
-          onCardLike={handleCardLike}
-          cards={cards}
+            onEditProfile={setIsEditProfilePopupOpen}
+            onEditAvatar={setIsEditAvatarPopupOpen}
+            onAddPlace={setIsAddPlacePopupOpen}
+            onPopupDeleteCard={setIsPopupDeleteCardOpen}
+            onDeletedCard={setDeletedCard}
+            onCardClick={setSelectedCard}
+            onCardLike={handleCardLike}
+            cards={cards}
           />
           <Footer />
           <AddPlacePopup
@@ -148,18 +171,21 @@ function App() {
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
             onLoading={isLoading}
+            onCloseOverlay={closeByOverlay}
           />
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
             onUpdateUser={handleUpdateUser}
             onClose={closeAllPopups}
             onLoading={isLoading}
+            onCloseOverlay={closeByOverlay}
           />
           <EditAvatarPopup
             onUpdateAvatar={handleUpdateAvatar}
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}
             onLoading={isLoading}
+            onCloseOverlay={closeByOverlay}
           />
           <PopupDeleteCard
             onClose={closeAllPopups}
@@ -167,9 +193,13 @@ function App() {
             onCardDelete={handleCardDelete}
             onLoading={isLoading}
             card={deletedCard}
+            onCloseOverlay={closeByOverlay}
           />
-
-          <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+          <ImagePopup 
+            card={selectedCard} 
+            onClose={closeAllPopups}
+            onCloseOverlay={closeByOverlay} 
+          />
         </div>
       </div>
     </CurrentUserContext.Provider>
