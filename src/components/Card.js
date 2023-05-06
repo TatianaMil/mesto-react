@@ -12,11 +12,6 @@ function Card({ card, onCardLike, onCardDelete, onCardClick, onPopupDeleteCard }
   }`
   const isOwner = card.owner._id === currentUser._id
 
-  //chanched our card or not delete card
-  // const deleteButtonClassName = `gallery__del ${
-  //   isOwner ? "gallery__del_active" : ""
-  // }`
-
   function handleLikeClick() {
     onCardLike(card)
   }

@@ -108,6 +108,7 @@ function App() {
       .then((newCard) => {
         setCards([newCard, ...cards])
         closeAllPopups()
+        console.log(cards)
       })
       .catch((error) => console.log(`Ошибка: ${error}`))
       .finally(() => setIsLoading(false))

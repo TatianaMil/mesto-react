@@ -13,7 +13,8 @@ function ImagePopup({ card, onClose, onCloseOverlay }) {
           className="popup__button-close popup__button-close_big-img"
           type="button"
           onClick={onClose}
-        ></button>
+        >
+        </button>
         <img className="popup__img" src={card.link} alt={card.name} />
         <figcaption className="popup__title-img">{card.name}</figcaption>
       </figure>
