@@ -17,3 +17,7 @@
 ## Ссылка на GitHub Pages: 
 
 - [Проект mesto-react](https://tatianamil.github.io/mesto-react/)
+
+  ## В проект будет добавлено:
+  - авторизация и регистрация пользователей
+  - бэкенд часть
